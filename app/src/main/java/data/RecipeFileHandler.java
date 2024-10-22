@@ -1,5 +1,7 @@
 package data;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -14,6 +16,10 @@ public class RecipeFileHandler {
         this.filePath = filePath;
     }
 
+    public String getFilePath() {
+        return this.filePath;
+    }
+
     /**
      * 設問1: 一覧表示機能
      * recipes.txtからレシピデータを読み込み、それをリスト形式で返します。 <br> 
@@ -22,11 +28,19 @@ public class RecipeFileHandler {
      * @return レシピデータ
      */
     public ArrayList<String> readRecipes() {
-        // try {
-
-        // } catch (IOException e) {
-        //     System.out.println("Error reading file:" + e.getMessage());
-        // }
+        try (BufferedReader reader = new BufferedReader(new FileReader(this.filePath))) {
+            String line;
+            ArrayList<String> recipeName = new ArrayList<>();
+            String[] ingredients;
+            while ((line = reader.readLine()) != null) {
+                String[] menues = line.split("/n");
+                
+                System.out.println(line);
+            }
+            reader.close();
+        } catch (IOException e) {
+            System.out.println("Error reading file:" + e.getMessage());
+        }
         return null;
     }
 
